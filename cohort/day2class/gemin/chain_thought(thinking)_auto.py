@@ -1,7 +1,10 @@
-from dotenv import load_dotenv
 from google import genai
 from google.genai import types
 import os
+import json
+from dotenv import load_dotenv
+
+
 load_dotenv()
 
 client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
@@ -31,17 +34,43 @@ Output: {{ step: "output", content: "4" }}
 Output: {{ step: "validate", content: "seems like 4 is correct ans for 2 + 2" }}
 Output: {{ step: "result", content: "2 + 2 = 4 and that is calculated by adding all numbers" }}
 
-
 """
 
-response = client.models.generate_content(
-    model="gemini-2.0-flash-001",
-    contents=f"System Prompt: {system_prompt}, User: why is water white",
-    config=types.GenerateContentConfig(
-        response_mime_type="application/json",
+message = [f"""role: system, content: {system_prompt}"""]
 
-    ),
-)
+query = input(">>>")
+message.append(f"""role: user, content: {query}""")
+print(message)
+print(type(message))
+hold = []
+while(True):
+
+    response = client.models.generate_content(
+        model="gemini-2.0-flash-001",
+        contents = message,
+        config=types.GenerateContentConfig(
+            response_mime_type="application/json",
+        ),
+    )
+
+    parsed_response = json.loads(response.text)
+    hold = message.copy()
+    message.clear()
+
+    hold.append(json.dumps({"role": "assistant", "content": parsed_response}))
+    print("\n\nhold part ",hold)
 
 
-print(response.text)
+
+    if parsed_response.get("step") != "output":
+        print(f"🧠: {parsed_response.get("content")}")
+        message.clear()
+        message = hold.copy()
+        hold.clear()
+        print("\n\nmessage part: ",message)
+        print("\n\nagain hold part ",hold)
+        continue
+    
+
+    print(f"🤖 {parsed_response.get("output")}")
+    break
