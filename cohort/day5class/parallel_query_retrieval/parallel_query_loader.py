@@ -36,24 +36,4 @@ vector_store=QdrantVectorStore.from_documents(
 
 vector_store.add_documents(documents=split_doc)
 
-retrive = QdrantVectorStore.from_existing_collection(
-    collection_name = "parallel_query",
-    embedding=embedding,
-    url="http://localhost:6333",
-)
-
-relevent_chunk = retrive.similarity_search(
-    query="What is FS Module",
-)
-
-formatted = []
-
-for doc in relevent_chunk:
-    snippet = f"[Page {doc.metadata.get('page')}] \n{doc.page_content}"
-    formatted.append(snippet)
-
-context = "\n\n".join(formatted)
-
-
-print(formatted)
-
+print("Doc is loaded in the vector database")

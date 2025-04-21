@@ -22,8 +22,7 @@ def retrieve(query: str) -> str:
     relevent_chunk = retrive.similarity_search(
         query=query,
     )
-    #
-    # print("\n\n Relevent Chunk \n\n\n", relevent_chunk)
+
     seen = set()
     unique = []
 
@@ -36,8 +35,6 @@ def retrieve(query: str) -> str:
             unique.append(doc)
 
 
-    # print("\n\n\n unique: ", unique)
-    #
     formatted = []
 
     for doc in unique:

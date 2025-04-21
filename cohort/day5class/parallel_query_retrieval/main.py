@@ -1,11 +1,9 @@
 from openai import OpenAI
 from dotenv import load_dotenv
-import json
-
-
 from parallel_query_retrieval import retrieve
 from answer_ai import answer_AI
 import os
+import json
 
 load_dotenv()
 
@@ -49,9 +47,9 @@ for i in question:
     answer = retrieve(i)
     array.append(answer)
 
-print(array)
 
 output = answer_AI(query, json.dumps(array))
+
 print(output)
 
 
