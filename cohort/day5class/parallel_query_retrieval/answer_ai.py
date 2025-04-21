@@ -29,4 +29,4 @@ def answer_AI(query, assistant):
 
     )
 
-    return response.choices[1].message.content
+    return response.choices[0].message.content
