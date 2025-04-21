@@ -1,4 +1,4 @@
-from typing import List, Tuple, Dict
+from typing import Li, Tuple, Dict
 import os
 
 from qdrant_client import QdrantClient
@@ -7,7 +7,7 @@ from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
 
 def reciprocal_rank_fusion(rankings, k = 15):
-    scores: Dict[str, float] = {}
+    scores = {}
     for ranking in rankings:
         for rank, doc_id in enumerate(ranking):
             scores[doc_id] = scores.get(doc_id, 0) + 1.0 / (k + rank + 1)
