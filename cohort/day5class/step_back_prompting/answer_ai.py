@@ -8,7 +8,6 @@ load_dotenv()
 client = OpenAI(
     api_key=os.getenv("GOOGLE_API_KEY"),
     base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
-
 )
 
 def answer_AI(query, assistant=""):

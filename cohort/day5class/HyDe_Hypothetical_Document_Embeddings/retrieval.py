@@ -1,4 +1,3 @@
-import re
 from langchain_qdrant import QdrantVectorStore
 from qdrant_client import QdrantClient
 from langchain_google_genai import GoogleGenerativeAIEmbeddings

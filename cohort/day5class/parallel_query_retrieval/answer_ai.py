@@ -23,7 +23,7 @@ def answer_AI(query, assistant):
     """
     message =[{"role":"system","content":system_prompt},{"role":"user","content":query},{"role":"assistant","content":assistant}]
     response=client.chat.completions.create(
-        model="gemini-1.0-flash",
+        model="gemini-2.0-flash",
         messages=message,
         response_format={"type":"json_object"}
 

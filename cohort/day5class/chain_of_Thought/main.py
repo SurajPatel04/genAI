@@ -40,6 +40,7 @@ query = input("> ")
 message=[{"role":"system","content":system_prompt},{"role":"user","content":query}]
 question = ai(message) 
 
+print("\nQuestions: ")
 print(question)
 
 answer=""
@@ -52,8 +53,11 @@ for i in question:
     response.append(answer)
 
 
+
 output = answer_AI(query, json.dumps(response))
 
+print("\n------------------")
+print("Answer: ")
 print(output)
 
 

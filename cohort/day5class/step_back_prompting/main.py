@@ -29,8 +29,6 @@ RESPONSE FORMAT (Strictly follow this structure):
 User Question: <repeat the original question here>
 <write the generalized, step-back question here>
 
-
-
 Here are a few examples:
 Original Question: Which version of Node.js introduced the `fs.promises` API?
 Stepback Question: What are the key features introduced in different versions of Node.js?
@@ -52,14 +50,15 @@ query = input("> ")
 message=[{"role":"system","content":system_prompt},{"role":"user","content":query}]
 question = ai(message) 
 
-print("🧠 Step Back Question: ",question)
+print("Step Back Question: ")
+print(question)
 
 relevant_chunk = retrieve(question)
 
-print("LLM Answer is: ")
-
 llm_output = answer_AI(query, relevant_chunk)
 
+print("\n------------------")
+print("Answer: ")
 print(llm_output)
 
 

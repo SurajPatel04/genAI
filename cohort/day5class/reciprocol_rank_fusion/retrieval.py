@@ -1,6 +1,4 @@
-from typing import Li, Tuple, Dict
 import os
-
 from qdrant_client import QdrantClient
 from langchain_qdrant import QdrantVectorStore
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
@@ -11,7 +9,6 @@ def reciprocal_rank_fusion(rankings, k = 15):
     for ranking in rankings:
         for rank, doc_id in enumerate(ranking):
             scores[doc_id] = scores.get(doc_id, 0) + 1.0 / (k + rank + 1)
-    # return list of (doc_id, score) sorted by score desc
     return sorted(scores.items(), key=lambda x: x[1], reverse=True)
 
 
@@ -59,6 +56,6 @@ def retrieve(queries,k=15):
         text = doc.page_content.strip()
         formatted.append(f"[Page {page}]\n{text}")
     
-    print(formatted)
+
     return "\n\n".join(formatted)
 

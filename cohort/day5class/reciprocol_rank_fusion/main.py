@@ -43,14 +43,15 @@ query = input("> ")
 message=[{"role":"system","content":system_prompt},{"role":"user","content":query}]
 question = ai(message) 
 
+print("\nQuestions: ")
 print(question)
 
 relevent_chunk = retrieve(question)
 
-
-
 output = answer_AI(query, relevent_chunk)
 
+print("\n------------------")
+print("Answer: ")
 print(output)
 
 
