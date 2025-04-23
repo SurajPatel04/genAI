@@ -31,6 +31,4 @@ def retrieve(query) -> str:
         formatted.append(snippet)
 
     context = "\n\n".join(formatted)
-    
-
     return context
