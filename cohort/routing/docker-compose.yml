@@ -1,0 +1,19 @@
+services:
+  # ────────────────────────
+  # Qdrant for Python
+  qdrant_py:
+    image: qdrant/qdrant:latest
+    container_name: qdrant_py
+    # expose both REST (6333) and gRPC (6334) inside the container
+    ports:
+      - "6333:6333"   # host-6333 → container-6333 (HTTP/REST)
+
+  # ────────────────────────
+  # Qdrant for Node.js
+  qdrant_node:
+    image: qdrant/qdrant:latest
+    container_name: qdrant_node
+    ports:
+      - "6335:6333"   # host-6335 → container-6333 (HTTP/REST)
+
+
