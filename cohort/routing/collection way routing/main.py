@@ -22,7 +22,7 @@ client = OpenAI(
 tools = {
     "ret":{
         "fn":ret,
-        "description":"This function takes user_query, collection_name, url as input and print the similar chunk"
+        "description":"This function takes user_query, collection_name as input and print the similar chunk"
     }
 }
 
@@ -42,9 +42,9 @@ system_prompt = f"""
     
 
     Available Tools: 
-    "ret":"This function takes user_query, collection_name, url as input and print the similar chunk"
+    "ret":"This function takes user_query, collection_name as input and print the similar chunk"
 
-    In ret you need to pass the user_query, collection_name and url and you choose right collection_name and the right url
+    In ret you need to pass the user_query, collection_name and you choose right collection_name and the right url
 
     Example: 
 User query: What is fs module?
