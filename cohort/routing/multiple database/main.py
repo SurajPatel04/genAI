@@ -31,6 +31,7 @@ system_prompt = f"""
     You are an helpfull AI Assistant who is specialized in resolving user query.
 
     Note:
+    If the question is not related to the any collection_name then do not call the tools
     Answer should be in detail
     You recive a question and you give answer based on the assistant content and 
     also Mention the page number from where did you pick all the information and
