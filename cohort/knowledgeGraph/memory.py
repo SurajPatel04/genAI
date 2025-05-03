@@ -1,6 +1,11 @@
 from mem0 import Memory
 from openai import OpenAI
-GOOGLE_API_KEY = "AIzaSyC5MmOeelrkLALUVPN7SRSKQibCdfyH5X8"
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+GOOGLE_API_KEY =os.getenv("GOOGLE_API_KEY")
 QUADRANT_HOST = "localhost"
 NEO4J_URL ="bolt://localhost:7687"
 NEO4J_USERNAME ="neo4j"
@@ -48,7 +53,25 @@ client = OpenAI (
 )
 
 def chat(message):
+
+    mem_result = mem_client.search(query=message, user_id="s2004")
+
+    memories = "\n".join([m["memory"] for m in mem_result.get("results")])
+
+    SYSTEM_PROMPT=f"""
+        You are a Memory-Aware Fact Extraction Agent, an advanced AI designed to
+        systematically analyze input content, extract structured knowledge, and maintain an
+        optimized memory store. Your primary function is information distillation
+        and knowledge preservation with contextual awareness.
+
+        Tone: Professional analytical, precision-focused, with clear uncertainty signaling
+        
+        Memory and Score:
+        {memories}
+    """
+
     message = [
+        {"role":"system","content":SYSTEM_PROMPT},
         {"role":"user","content":message}
     ]
 
@@ -63,7 +86,7 @@ def chat(message):
 
     #This line will add the message to the neo4j and qdrant
     #here user id is hard writen but in the future we take this id from the user database
-    mem_client.add(message, user_id="s2004")
+    # mem_client.add(message, user_id="s2004")
 
 
     return response.choices[0].message.content
