@@ -18,6 +18,7 @@ config = {
         "config": {
             "api_key": GOOGLE_API_KEY,
             "model": "models/gemini-embedding-exp-03-07",
+            # here increase the dim size, because diffult size is 768
             "embedding_dims": 1536,
         },
     },
@@ -86,7 +87,7 @@ def chat(message):
 
     #This line will add the message to the neo4j and qdrant
     #here user id is hard writen but in the future we take this id from the user database
-    # mem_client.add(message, user_id="s2004")
+    mem_client.add(message, user_id="s2004")
 
 
     return response.choices[0].message.content
