@@ -61,7 +61,7 @@ system_prompt = """
     readLinks = "This function takes MethodName and the url as a input and return the output"
     getData = "This function takes user query and return the relevant chunks" 
 
-# STEP 2: Give example of the output:
+
     Example:
     User Query : Read this links https://chaidocs.vercel.app/youtube/chai-aur-sql/introduction/ and tell me what is PostgresSQL
     Output :{{"step": "plan", "content": "The user is inetersted in read the links and then tell me about the PostgresSQL"}}
