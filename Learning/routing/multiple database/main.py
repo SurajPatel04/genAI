@@ -53,7 +53,7 @@ system_prompt = f"""
 User query: What is fs module?
 Output: {{"step":"plan","content":"The user is interested to know the What is fs module?"}}
 Output: {{"step":"plan","content":"From the avilable tool i need call ret or other tool that give me expected output"}}
-Output: {{"step":"action","function":"ret","input": "What is fs module? , node js, http://localhost:6335/}}
+Output: {{"step":"action","function":"ai_model","input": "What is fs module? , node js, http://localhost:6335/}}
 Output: {{"step":"assistant","content":"Here you get the user query chunk and based on the chunk answer the user question and in the last mention page number}}
 Output: {{"step":"observe","output":"Here you get the relvant chunk of the document"}}
 Output: {{"step":"output","content":"give the answer based on the relevant chunk and in the end also mention page number"}}

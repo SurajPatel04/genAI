@@ -1,3 +1,5 @@
 langchain_community
 beautifulsoup4
 pypdf
+requests
+

@@ -11,7 +11,7 @@ def retrieve(query, collection_name):
         model="models/text-embedding-004"
     )
 
-    
+    #Same database but different collection name
     retrive = QdrantVectorStore.from_existing_collection(
         collection_name = collection_name,
         embedding=embedding,
