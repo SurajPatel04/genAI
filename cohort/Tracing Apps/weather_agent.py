@@ -4,12 +4,14 @@ import os
 import json
 import requests
 from langsmith.wrappers import wrap_openai
+from langsmith import traceable
 
 load_dotenv()
 
 client = wrap_openai(OpenAI(api_key=os.getenv("GOOGLE_API_KEY"),
            base_url="https://generativelanguage.googleapis.com/v1beta/openai/"))
 
+@traceable
 def get_weather(city):
     print("🔨 Tool Called: get_weather", city)
     
