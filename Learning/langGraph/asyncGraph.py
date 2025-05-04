@@ -6,6 +6,7 @@ from langsmith.wrappers import wrap_openai
 from openai import OpenAI
 from pydantic import BaseModel
 import os
+import asyncio
 
 load_dotenv()
 
@@ -131,14 +132,15 @@ graph = graph_builder.compile()
 
 
 """Useing the graph"""
-def call_graph():
+async def call_graph():
     state={
         "user_message":"Can you explain the pydantic",
         "is_coding_question":False,
         "ai_message":""
     }
-    result = graph.invoke(state)
+    result = await graph.ainvoke(state)
 
     print("Final Result is:  ", result)
 
-call_graph()
+asyncio.run(call_graph())
+
