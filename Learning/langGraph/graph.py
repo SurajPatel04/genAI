@@ -40,7 +40,11 @@ def detect_query(state: State):
     """
 
     """Open AI call for the query detection is this query is coding or normal"""
-
+    
+    """Here i am using beta not chat,
+       This only response in the defined structured,using pydantic
+        DetectCallResponse in this class i decided the structured
+    """
     result = client.beta.chat.completions.parse(
         model="gemini-1.5-flash",
         response_format=DetectCallResponse,
@@ -73,6 +77,10 @@ def solve_coding_question(state: State):
     """
     """Gemini Solve this question model 2.5 flash"""
     
+    """Here i am using beta not chat,
+       This only response in the defined structured,using pydantic
+        CodingAIResponse in this class i decided the structured
+    """
     result = client.beta.chat.completions.parse(
         model="gemini-2.0-flash", 
         response_format=CodingAIResponse,
