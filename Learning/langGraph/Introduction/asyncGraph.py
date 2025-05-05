@@ -131,7 +131,7 @@ graph = graph_builder.compile()
 
 
 
-"""Useing the graph"""
+"""Using the graph"""
 async def call_graph():
     state={
         "user_message":"Can you explain the pydantic",
