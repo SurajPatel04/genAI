@@ -18,7 +18,7 @@ class CodingAIResponse(BaseModel):
 
 
 client = wrap_openai(OpenAI(
-    api_key=os.getenv("GOOGLE_API_KEY"),
+    api_key=os.getenv("OPENAI_API_KEY"),
     base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
 ))
 
