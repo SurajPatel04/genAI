@@ -3,7 +3,6 @@ from typing_extensions import TypedDict
 from langgraph.graph.message import add_messages
 from langgraph.graph import START, END, StateGraph
 from dotenv import load_dotenv
-from openai import OpenAI
 from langchain_core.tools import tool
 from langgraph.types import interrupt
 from langchain.chat_models import init_chat_model
