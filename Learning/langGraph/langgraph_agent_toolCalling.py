@@ -25,16 +25,14 @@ def add(x: int, y: int) -> int:
     return x + y
 
 
-class DetectCallResponse(BaseModel):
-    is_question_ai: bool
-
-class CodingAIResponse(BaseModel):
-    answer:str
-
 llm = ChatGoogleGenerativeAI(
     api_key = os.getenv("GOOGLE_API_KEY"),
     model="gemini-2.0-flash",
 )
+
+# ----- 1. pydantic schema -----
+class DetectCallResponse(BaseModel):
+    is_coding_question: bool
 
 class State(BaseModel):
     user_message: str
@@ -45,15 +43,14 @@ def detect_query(state: State) -> State:
     user_message = state.user_message
 
     # Setup the output parser
-    parser = PydanticOutputParser(pydantic_object=DetectCallResponse)
+    structured_llm = llm.with_structured_output(DetectCallResponse)
 
 
     # Use f-string to insert parser instructions
     system_prompt = f"""
-You are an AI assistant. Your job is to detect if the user's query is related
-to a coding question or not.
-{parser.get_format_instructions()}
-"""
+    You are an AI assistant. Your job is to detect if the user's query is related
+    to a coding question or not.
+    """
 
     # Format messages
     msg = [
@@ -62,14 +59,12 @@ to a coding question or not.
     ]
 
     # Call the model
-    result = llm.invoke(msg)
-    print("Model response:", result.content)
+    result = structured_llm.invoke(msg)
 
     # Parse the result using the output parser
-    parsed = parser.parse(result.content)
 
     # Return updated state
-    return state.model_copy(update={"is_coding_question": parsed.is_question_ai})
+    return state.model_copy(update={"is_coding_question": result.is_coding_question})
 
 def routing(state:State) -> Literal["solve_coding_question","solve_simple_question"]:
     is_coding_question = state.is_coding_question
@@ -145,7 +140,7 @@ graph = graph_builder.compile()
 
 async def call_graph():
     state={
-        "user_message":"What is 2 + 2",
+        "user_message":"write print hello in java program",
         "is_coding_question":False,
         "ai_message":""
     }
